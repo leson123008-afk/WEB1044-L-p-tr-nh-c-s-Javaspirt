@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 4</title>
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+
+    <h2>Bài 4 - Mở rộng class</h2>
+    <div id="output"></div>
+
+    <script>
+        // Category (bổ sung)
+        class Category {
+            constructor(id, name) {
+                this.id = id;
+                this.name = name;
+            }
+
+            rename(newName) {
+                this.name = newName;
+            }
+
+            toUpperCaseName() {
+                return this.name.toUpperCase();
+            }
+        }
+
+        // Product (bổ sung)
+        class Product {
+            constructor(name, price, quantity) {
+                this.name = name;
+                this.price = price;
+                this.quantity = quantity;
+            }
+
+            increasePrice(amount) {
+                this.price += amount;
+            }
+
+            decreasePrice(amount) {
+                this.price -= amount;
+            }
+
+            isExpensive() {
+                return this.price > 1000;
+            }
+        }
+
+        // Cart (bổ sung)
+        class Cart {
+            constructor() {
+                this.items = [];
+            }
+
+            add(product, qty) {
+                this.items.push({ product, qty });
+            }
+
+            clearCart() {
+                this.items = [];
+            }
+
+            getItemCount() {
+                return this.items.length;
+            }
+        }
+
+        // Test
+        let c = new Category(1, "điện tử");
+        c.rename("Electronics");
+
+        let p = new Product("Laptop", 900, 5);
+        p.increasePrice(200);
+
+        let cart = new Cart();
+        cart.add(p, 2);
+
+        document.getElementById("output").innerHTML = `
+        Category: ${c.toUpperCaseName()} <br>
+        Giá sản phẩm: ${p.price} <br>
+        Đắt không: ${p.isExpensive()} <br>
+        Số loại trong giỏ: ${cart.getItemCount()}
+    `;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 3 - Cart</title>
+
+    <!-- Fix favicon -->
+    <link rel="icon" href="data:,">
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Giỏ hàng</h2>
+    <div id="output" class="result"></div>
+
+    <script>
+        // Class Product (dùng lại)
+        class Product {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+        }
+
+        // Class Cart
+        class Cart {
+            constructor() {
+                this.items = [];
+            }
+
+            // a. Thêm sản phẩm
+            addProduct(product, qty) {
+                let existing = this.items.find(item => item.product.name === product.name);
+                if (existing) {
+                    existing.qty += qty;
+                } else {
+                    this.items.push({ product: product, qty: qty });
+                }
+            }
+
+            // b. Xóa theo tên
+            removeProduct(productName) {
+                this.items = this.items.filter(item => item.product.name !== productName);
+            }
+
+            // c. Cập nhật số lượng
+            updateProductQuantity(productName, qty) {
+                let item = this.items.find(item => item.product.name === productName);
+                if (item) {
+                    item.qty = qty;
+                }
+            }
+
+            // d. Tổng tiền
+            getTotal() {
+                return this.items.reduce((total, item) => {
+                    return total + item.product.price * item.qty;
+                }, 0);
+            }
+
+            // e. Thông tin giỏ hàng
+            getCartInfo() {
+                if (this.items.length === 0) return "Giỏ hàng trống";
+
+                return this.items.map(item => {
+                    return `${item.product.name} - SL: ${item.qty} - Giá: ${item.product.price}`;
+                }).join("<br>");
+            }
+        }
+
+        // Test
+        let cart = new Cart();
+
+        let p1 = new Product("Laptop", 1000);
+        let p2 = new Product("Phone", 500);
+
+        cart.addProduct(p1, 2);
+        cart.addProduct(p2, 3);
+
+        cart.updateProductQuantity("Laptop", 5);
+        cart.removeProduct("Phone");
+
+        // Hiển thị
+        let output = `
+        <b>Danh sách:</b><br>
+        ${cart.getCartInfo()} <br><br>
+        <b>Tổng tiền:</b> ${cart.getTotal()}
+    `;
+
+        document.getElementById("output").innerHTML = output;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 1 - Category</title>
+
+    <!-- Fix lỗi favicon -->
+    <link rel="icon" href="data:,">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #output {
+            margin-top: 10px;
+            font-size: 18px;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Thông tin Category</h2>
+    <p id="output"></p>
+
+    <script>
+        // Constructor function
+        function Category(id, name) {
+            this.id = id;
+            this.name = name;
+
+            this.info = function () {
+                return "Category [ID: " + this.id + ", Name: " + this.name + "]";
+            };
+        }
+
+        // Tạo object
+        let category1 = new Category(1, "Electronics");
+
+        // Hiển thị ra màn hình
+        document.getElementById("output").innerText = category1.info();
+    </script>
+
+</body>
+
+</html>

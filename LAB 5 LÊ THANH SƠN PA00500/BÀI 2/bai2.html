@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2 - Product</title>
+
+    <!-- Fix lỗi favicon -->
+    <link rel="icon" href="data:,">
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Thông tin Product</h2>
+    <div id="output" class="result"></div>
+
+    <script>
+        // Tạo class Product
+        class Product {
+            constructor(name, price, description, quantity) {
+                this.name = name;
+                this.price = price;
+                this.description = description;
+                this.quantity = quantity;
+            }
+
+            // a. Tính giá sau giảm %
+            getDiscountedPrice(percent) {
+                return this.price * (1 - percent / 100);
+            }
+
+            // b. Tăng/giảm số lượng
+            updateQuantity(amount) {
+                this.quantity += amount;
+            }
+
+            // c. Kiểm tra còn hàng
+            isInStock() {
+                return this.quantity > 0;
+            }
+
+            // d. Thông tin chi tiết
+            getInfo() {
+                return `Tên: ${this.name} | Giá: ${this.price} | Mô tả: ${this.description} | Số lượng: ${this.quantity}`;
+            }
+
+            // e. Tổng giá trị tồn kho
+            totalValue() {
+                return this.price * this.quantity;
+            }
+        }
+
+        // Tạo object
+        let product1 = new Product("Laptop", 1000, "Máy tính xách tay", 5);
+
+        // Gọi các method
+        let output = `
+        ${product1.getInfo()} <br>
+        Giá sau giảm 10%: ${product1.getDiscountedPrice(10)} <br>
+        Còn hàng: ${product1.isInStock()} <br>
+    `;
+
+        // Cập nhật số lượng
+        product1.updateQuantity(-2);
+
+        output += `
+        Sau khi bán 2 sản phẩm: ${product1.quantity} <br>
+        Tổng giá trị tồn kho: ${product1.totalValue()}
+    `;
+
+        // Hiển thị
+        document.getElementById("output").innerHTML = output;
+    </script>
+
+</body>
+
+</html>
