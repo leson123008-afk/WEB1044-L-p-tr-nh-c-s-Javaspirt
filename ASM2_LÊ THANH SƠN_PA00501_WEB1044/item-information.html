@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Hoa Của Trí Bùi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <style>
+        .container {
+            margin: 80px auto;
+            justify-content: center;
+            display: flex;
+        }
+        .container img {
+            margin: 0 20px;
+        }
+        .quantity input {
+            text-align: center;
+            width: 30px;
+        }
+        .price {
+            display: flex;
+            align-items: center;
+        }
+        .price h1 {
+            margin: -10px 0;
+            color: #06C471;
+        }
+        .buttons button {
+            font-size: large;
+            margin-top: 20px;
+            padding: 10px 40px;
+            border-radius: 10px;
+            background: white;
+            color: #06C471;
+            border: 1px solid #06C471;
+            transition: .3s;
+        }
+        .buttons button:hover {
+            background: #06C471;
+            color: white;
+        }
+        .secondTopBar h4 {
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+        
+</head>
+<body>
+    <div class="topBar">
+        <div class="leftTop">
+            <input type="text" name="" id="" placeholder="Nhập tên hoa"><button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <img src="/img/Logo.png" alt="" id="logoVuonHoaTuoi">
+        <div class="rightTop">
+            <button><i class="fa-brands fa-facebook-f"></i></button>
+            <button><i class="fa-brands fa-tiktok"></i></button>
+            <button><i class="fa-brands fa-youtube"></i></button>
+            <button><i class="fa-brands fa-square-instagram"></i></button>
+            <button><i class="fa-brands fa-twitter"></i></button>
+            <button><i class="fa-brands fa-pinterest"></i></button>
+            <a href="/index.html"><img src="/img/shopping-cart.png" alt=""></a>
+        </div>
+    </div>
+
+    <div class="secondTopBar">
+        <h4>Hoa Sinh Nhật  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Khai Trương  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Tặng Tốt Nghiệp  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa Hồng  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Thiết Kế  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Chủ Đề  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Loại Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4 id="scndBar_lastChild"><a href="/register.html">Đăng Ký / Đăng Nhập</a></h4>
+        <h4 id="logout">Đăng Xuất</h4>
+    </div>
+
+    <div class="container">
+        <img src="/img/hoa1.jpg" alt="">
+        <div class="content">
+            <h1>BÓ HOA HỒNG SINH NHẬT GIÁ RẺ ĐẸP</h1>
+            <div class="price">
+                <h1>280,000đ</h1>
+                <del style="color: red; margin-left: 10px">350,000đ</del>
+            </div>
+            <div class="details">
+                <p style="color: red;">Tiết kiệm: 20%</p>
+                <p>Bó hoa hồng sinh nhật giá rẻ đẹp</p>
+                <p>Phù hợp: sinh nhật, kỷ niệm, hẹn hò</p>
+                <p>• Hoa Hồng Kem</p>
+                <p>• Hoa Cẩm Chướng</p>
+                <p>• Cỏ đồng tiền</p>
+                <p>• Lá + Phụ kiện</p>
+            </div>
+            <div class="note">
+                (*) Shop hoa tươi với dịch vụ đặt hoa online Vườn Hoa Tươi đảm bảo phong cách cắm, tone màu sắc. <br> Nếu có thay đổi về Hoa phụ và thời gian giao sẽ được thông báo đến Quý khách hàng xác nhận trước khi cắm hay bó.
+            </div>
+            <div class="quantity">
+                <label for="quantity">Số lượng:</label>
+                <input type="number" id="quantity" value="1">
+            </div>
+            <div class="buttons">
+                <button class="order">Thêm vào giỏ hàng</button>
+                <button class="call">ĐẶT NHANH QUA SDT</button>
+                <button class="zalo">ĐẶT HOA QUA ZALO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let logoVuonHoaTuoi = document.getElementById('logoVuonHoaTuoi').parentElement.children[1];
+        console.log(logoVuonHoaTuoi)
+
+        logoVuonHoaTuoi.addEventListener('click', () => {
+            window.location.href = '/index.html';
+        })
+    </script>
+    <script src="/script/check-status.js"></script>
+    
+</body>
+</html>

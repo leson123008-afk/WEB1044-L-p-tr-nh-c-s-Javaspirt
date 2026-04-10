@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="/style/log-reg.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng Ký</h2>
+        <form>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="repass" placeholder="Repeat Password" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" onclick="register(this)">Register</button>
+        </form>
+        <p>Đã có tài khoản? <a href="login.html">Đăng nhập tại đây</a></p>
+    </div>
+    <script>
+        let daDangKy = false;
+
+        function checkAlreadyRegister() {
+            let user = JSON.parse(localStorage.getItem("user"));
+            if (user != null) {
+                console.log("Đã có tài khoản đăng ký");
+                daDangKy = true;
+            }
+        }
+
+        checkAlreadyRegister();
+
+        if (daDangKy == true) {
+            let goToLogin = window.prompt("Đã có tài khoản đăng ký \nBỏ trống để đăng nhập \nNhập bất kì để đăng ký lại");
+            if (goToLogin == null || goToLogin == "") {
+                console.log("Đi đến trang đăng nhập.");
+                window.location.href = "login.html";
+            } else {
+                console.log("Người dùng chọn đăng ký tài khoản mới.");
+            }
+        }
+    </script>
+    <script src="/script/log-reg.js"></script>
+</body>
+</html>
