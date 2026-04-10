@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 4 - Giỏ hàng - FPT Polytechnic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .lab {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #666;
+        }
+
+        .cart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .cart-header {
+            background: #f1f1f1;
+            padding: 15px 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .product-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .price {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn.minus {
+            background: #ff9800;
+            color: white;
+        }
+
+        .quantity-btn.plus {
+            background: #4caf50;
+            color: white;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .remove-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .remove-btn:hover {
+            background: #d32f2f;
+        }
+
+        .total-section {
+            text-align: right;
+            padding: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .total {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .checkout-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background: #f57c00;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+      
+    </div>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h2>Giỏ hàng của bạn</h2>
+        </div>
+
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+                <!-- Sản phẩm sẽ được JavaScript thêm vào đây -->
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total">
+                Tổng tiền: <strong id="total-price">420.000đ</strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Thanh toán</button>
+        </div>
+    </div>
+
+    <div class="empty-cart" id="empty-cart">
+        <h3>Giỏ hàng của bạn đang trống</h3>
+        <p>Hãy thêm sản phẩm vào giỏ hàng!</p>
+    </div>
+
+    <script>
+        // Dữ liệu giỏ hàng (có thể lưu vào localStorage sau này)
+        let cart = [
+            {
+                id: 1,
+                name: "Cà phê xanh",
+                price: 180000,
+                quantity: 1
+            },
+            {
+                id: 2,
+                name: "Cà phê Arabica",
+                price: 120000,
+                quantity: 2
+            }
+        ];
+
+        // Hàm định dạng tiền tệ Việt Nam
+        function formatCurrency(amount) {
+            return amount.toLocaleString('vi-VN') + 'đ';
+        }
+
+        // Render lại toàn bộ giỏ hàng
+        function renderCart() {
+            const tbody = document.getElementById('cart-body');
+            tbody.innerHTML = '';
+
+            if (cart.length === 0) {
+                document.getElementById('cart-table').style.display = 'none';
+                document.getElementById('empty-cart').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('cart-table').style.display = 'table';
+                document.getElementById('empty-cart').style.display = 'none';
+            }
+
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="product-name">${item.name}</td>
+                    <td class="price">${formatCurrency(item.price)}</td>
+                    <td>
+                        <div class="quantity">
+                            <button class="quantity-btn minus" onclick="changeQuantity(${index}, -1)">-</button>
+                            <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                            <button class="quantity-btn plus" onclick="changeQuantity(${index}, 1)">+</button>
+                        </div>
+                    </td>
+                    <td class="price">${formatCurrency(itemTotal)}</td>
+                    <td>
+                        <button class="remove-btn" onclick="removeItem(${index})">Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('total-price').textContent = formatCurrency(total);
+        }
+
+        // Thay đổi số lượng
+        function changeQuantity(index, change) {
+            cart[index].quantity += change;
+
+            // Không cho số lượng nhỏ hơn 1
+            if (cart[index].quantity < 1) {
+                cart[index].quantity = 1;
+            }
+
+            renderCart();
+        }
+
+        // Xóa sản phẩm
+        function removeItem(index) {
+            if (confirm(`Bạn có chắc muốn xóa "${cart[index].name}" khỏi giỏ hàng?`)) {
+                cart.splice(index, 1);
+                renderCart();
+            }
+        }
+
+        // Thanh toán (demo)
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Giỏ hàng của bạn đang trống!");
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            alert(`Cảm ơn bạn đã mua hàng!\n\nTổng thanh toán: ${formatCurrency(total)}\n\nĐang chuyển đến trang thanh toán...`);
+            // Có thể thêm window.location = "payment.html" sau này
+        }
+
+        // Khởi tạo giỏ hàng khi tải trang
+        window.onload = function () {
+            renderCart();
+        };
+    </script>
+
+</body>
+
+</html>

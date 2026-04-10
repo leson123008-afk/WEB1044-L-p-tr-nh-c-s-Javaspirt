@@ -1,0 +1,146 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 6 - Fake Data Sinh Viên</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            width: 95%;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 250px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            background: #fff;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Danh sách 100 sinh viên (Fake Data)</h1>
+
+        <div class="controls">
+            <input type="text" id="search" placeholder="Tìm theo tên...">
+            <button onclick="searchStudent()">Tìm</button>
+            <button onclick="sortByAge()">Sắp xếp theo tuổi</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã SV</th>
+                    <th>Tên</th>
+                    <th>Tuổi</th>
+                    <th>Lớp</th>
+                    <th>Điểm</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        // ===== 1. Sinh dữ liệu giả =====
+        function generateStudents(n = 100) {
+            const names = ["An", "Bình", "Chi", "Dũng", "Hà", "Huy", "Lan", "Minh", "Nam", "Phúc"];
+            const classes = ["CNTT1", "CNTT2", "CNTT3"];
+
+            let arr = [];
+
+            for (let i = 1; i <= n; i++) {
+                let student = {
+                    id: "SV" + String(i).padStart(3, '0'),
+                    name: "Nguyễn " + names[Math.floor(Math.random() * names.length)],
+                    age: Math.floor(Math.random() * 5) + 18,
+                    class: classes[Math.floor(Math.random() * classes.length)],
+                    score: (Math.random() * 10).toFixed(1)
+                };
+                arr.push(student);
+            }
+
+            return arr;
+        }
+
+        let students = generateStudents();
+
+        // ===== 2. Render =====
+        function render(data) {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = data.map(sv => `
+            <tr>
+                <td>${sv.id}</td>
+                <td>${sv.name}</td>
+                <td>${sv.age}</td>
+                <td>${sv.class}</td>
+                <td>${sv.score}</td>
+            </tr>
+        `).join("");
+        }
+
+        render(students);
+
+        // ===== 3. Tìm kiếm =====
+        function searchStudent() {
+            const keyword = document.getElementById("search").value.toLowerCase();
+
+            const result = students.filter(sv =>
+                sv.name.toLowerCase().includes(keyword)
+            );
+
+            render(result);
+        }
+
+        // ===== 4. Sắp xếp =====
+        function sortByAge() {
+            students.sort((a, b) => a.age - b.age);
+            render(students);
+        }
+    </script>
+
+</body>
+
+</html>
+```

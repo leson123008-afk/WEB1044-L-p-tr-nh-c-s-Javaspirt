@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIG SALE 2026 - FPT Polytechnic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2a0033, #4b0082, #1a0022);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff4500;
+        }
+
+        .subtitle {
+            color: #ffd700;
+            font-size: 1.4rem;
+            margin-top: 8px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .sale-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sale-header h1 {
+            font-size: 5rem;
+            background: linear-gradient(90deg, #ffd700, #ff8c00, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(255, 140, 0, 0.6);
+            animation: glow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px #ffd700;
+            }
+
+            to {
+                text-shadow: 0 0 40px #ff4500, 0 0 60px #ffd700;
+            }
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.6rem;
+            margin: 20px 0 40px;
+            opacity: 0.95;
+        }
+
+        .countdown-box {
+            background: linear-gradient(145deg, #c8102e, #ff1a1a);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 30px 60px rgba(255, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+            animation: shine 10s linear infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-30%) translateY(-30%) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(30%) translateY(30%) rotate(25deg);
+            }
+        }
+
+        .timer-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.92);
+            border: 5px solid #ffd700;
+            border-radius: 18px;
+            width: 160px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .time-box:hover {
+            transform: scale(1.12);
+            border-color: #ffff00;
+        }
+
+        .time {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .label {
+            font-size: 1.15rem;
+            color: #ffd700;
+            font-weight: 700;
+            margin-top: 12px;
+            letter-spacing: 1.5px;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 16px 40px;
+            margin: 0 12px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-buy {
+            background: #ffd700;
+            color: #000;
+            font-size: 1.6rem;
+        }
+
+        .btn-buy:hover {
+            background: #ffea00;
+            transform: translateY(-6px);
+            box-shadow: 0 15px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-control {
+            background: #333;
+            color: white;
+        }
+
+        .btn-control:hover {
+            background: #555;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            margin-top: 80px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-content">
+        <div class="sale-header">
+            <h1>BIG SALE 2026</h1>
+            <p class="description">
+                Giảm giá lên đến 70% - Cơ hội vàng chỉ có trong thời gian giới hạn!
+            </p>
+        </div>
+
+        <div class="countdown-box" id="countdownBox">
+            <div class="confetti-container" id="confetti"></div>
+
+            <div class="timer-title">⏰ KHUYẾN MÃI KẾT THÚC SAU</div>
+
+            <div class="timer">
+                <div class="time-box">
+                    <div class="time" id="days">02</div>
+                    <div class="label">NGÀY</div>
+                </div>
+                <div class="time-box">
+                    <div class="time" id="hours">20</div>
+                    <div class="label">GIỜ</div>
+                </div>
+                <div class="time-box">
+                    <div class="time" id="minutes">15</div>
+                    <div class="label">PHÚT</div>
+                </div>
+                <div class="time-box">
+                    <div class="time" id="seconds">27</div>
+                    <div class="label">GIÂY</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn-buy" onclick="buyNow()">MUA NGAY - GIẢM SỐC!</button>
+                <button class="btn-control" id="pauseBtn" onclick="togglePause()">Tạm dừng</button>
+                <button class="btn-control" onclick="resetTimer()">Reset Timer</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 FPT Polytechnic • Lab 07 - Thực hành setInterval() nâng cao với JavaScript</p>
+        <p>Phiên bản dài & chi tiết - Được viết bởi Dũng</p>
+    </footer>
+
+    <script>
+        // ==================== CẤU HÌNH COUNTDOWN ====================
+        let targetDate = new Date().getTime() +
+            (3 * 24 * 60 * 60 * 1000) +   // 3 ngày
+            (20 * 60 * 60 * 1000) +       // 20 giờ
+            (15 * 60 * 1000) +            // 15 phút
+            (35 * 1000);                  // 35 giây (có thể chỉnh)
+
+        let timerInterval = null;
+        let isPaused = false;
+        let countdownEnded = false;
+
+        // ==================== TẠO CONFETTI ====================
+        function createConfetti(count = 60) {
+            const container = document.getElementById('confetti');
+            const colors = ['#ffd700', '#ff4500', '#00ff88', '#00ccff', '#ff00ff', '#ffff00'];
+
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+
+                piece.style.position = 'absolute';
+                piece.style.width = Math.random() * 10 + 6 + 'px';
+                piece.style.height = piece.style.width;
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = '-20px';
+                piece.style.opacity = Math.random() * 0.7 + 0.6;
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.zIndex = '10';
+
+                const duration = Math.random() * 4 + 5;
+                const rotation = Math.random() * 800 + 400;
+
+                piece.style.transition = `all ${duration}s linear`;
+                piece.style.transform = `rotate(0deg)`;
+
+                container.appendChild(piece);
+
+                // Bắt đầu rơi
+                setTimeout(() => {
+                    piece.style.top = '120%';
+                    piece.style.transform = `rotate(${rotation}deg)`;
+                    piece.style.opacity = '0';
+                }, 50);
+
+                // Xóa sau khi rơi xong
+                setTimeout(() => {
+                    piece.remove();
+                }, duration * 1000 + 100);
+            }
+        }
+
+        // ==================== CẬP NHẬT COUNTDOWN ====================
+        function updateCountdown() {
+            if (isPaused || countdownEnded) return;
+
+            const now = new Date().getTime();
+            let distance = targetDate - now;
+
+            if (distance <= 0) {
+                endCountdown();
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Cập nhật số
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Hiệu ứng khi sắp hết (dưới 10 phút)
+            if (distance < 600000) {
+                document.querySelectorAll('.time-box').forEach(box => {
+                    box.style.borderColor = '#ffff00';
+                    box.style.boxShadow = '0 0 25px #ffff00';
+                });
+            }
+        }
+
+        function endCountdown() {
+            countdownEnded = true;
+            clearInterval(timerInterval);
+
+            const box = document.getElementById('countdownBox');
+            box.innerHTML = `
+                <div style="text-align:center; padding:80px 20px;">
+                    <h2 style="font-size:4.5rem; color:#ffd700; margin-bottom:20px;">🎉 KHUYẾN MÃI ĐÃ KẾT THÚC! 🎉</h2>
+                    <p style="font-size:1.8rem; color:#fff;">Cảm ơn bạn đã theo dõi chương trình BIG SALE 2026</p>
+                </div>
+            `;
+            createConfetti(120);
+        }
+
+        // ==================== CÁC HÀM ĐIỀU KHIỂN ====================
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // chạy ngay
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pauseBtn');
+            btn.textContent = isPaused ? 'Tiếp tục' : 'Tạm dừng';
+            btn.style.backgroundColor = isPaused ? '#28a745' : '#333';
+        }
+
+        function resetTimer() {
+            if (confirm('Reset countdown về giá trị ban đầu?')) {
+                targetDate = new Date().getTime() +
+                    (3 * 24 * 60 * 60 * 1000) +
+                    (20 * 60 * 60 * 1000) +
+                    (15 * 60 * 1000) +
+                    (35 * 1000);
+
+                countdownEnded = false;
+                isPaused = false;
+                document.getElementById('pauseBtn').textContent = 'Tạm dừng';
+                document.getElementById('pauseBtn').style.backgroundColor = '#333';
+
+                startTimer();
+                createConfetti(40);
+            }
+        }
+
+        function buyNow() {
+            createConfetti(80);
+            alert('🎉 Chúc mừng bạn!\n\nBạn đã tham gia chương trình BIG SALE 2026 thành công!\nMã giảm giá: FPTBIG2026 - Giảm thêm 10%');
+        }
+
+        // ==================== KHỞI ĐỘNG ====================
+        window.onload = function () {
+            startTimer();
+
+            // Tạo confetti định kỳ
+            setInterval(() => {
+                if (!countdownEnded && Math.random() > 0.4) {
+                    createConfetti(30);
+                }
+            }, 7000);
+
+            // Tạo confetti ngay khi load
+            setTimeout(() => createConfetti(50), 600);
+        };
+
+        // Phím tắt
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'p') togglePause();
+            if (e.key.toLowerCase() === 'r') resetTimer();
+        });
+    </script>
+</body>
+
+</html>

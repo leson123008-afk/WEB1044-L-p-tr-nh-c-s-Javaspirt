@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Rajdhani:wght@700&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --red-dark: #a80000;
+    --red-mid: #cc0000;
+    --red-bright: #e82020;
+    --gold-dark: #8a5c00;
+    --gold-mid: #c98e00;
+    --gold: #f5c400;
+    --gold-light: #ffe066;
+    --card-bg: #1a1a1a;
+    --digit-bg: #111;
+    --digit-shine: #2a2a2a;
+    --white: #fff;
+    --cream: #f8e8c0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #900;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden;
+}
+
+/* ── Scene ────────────────────────────────── */
+.scene {
+    position: relative;
+    width: min(640px, 96vw);
+    padding: 48px 32px 52px;
+    border-radius: 24px;
+    background: radial-gradient(ellipse at 50% 0%, #e83030 0%, var(--red-mid) 40%, var(--red-dark) 100%);
+    box-shadow:
+        0 0 0 4px var(--gold-mid),
+        0 0 40px rgba(0, 0, 0, .5),
+        inset 0 0 60px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+
+/* sunburst rays */
+.scene::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: repeating-conic-gradient(rgba(255, 255, 255, .06) 0deg 10deg,
+            transparent 10deg 20deg);
+    animation: spinRay 30s linear infinite;
+}
+
+@keyframes spinRay {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Stars ────────────────────────────────── */
+.stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.stars span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--gold-light);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.stars span:nth-child(1) {
+    top: 12%;
+    left: 5%;
+    animation-delay: .1s;
+}
+
+.stars span:nth-child(2) {
+    top: 8%;
+    right: 6%;
+    animation-delay: .6s;
+}
+
+.stars span:nth-child(3) {
+    top: 50%;
+    left: 2%;
+    animation-delay: 1s;
+    width: 8px;
+    height: 8px;
+}
+
+.stars span:nth-child(4) {
+    top: 80%;
+    left: 8%;
+    animation-delay: .4s;
+}
+
+.stars span:nth-child(5) {
+    top: 75%;
+    right: 5%;
+    animation-delay: .9s;
+}
+
+.stars span:nth-child(6) {
+    top: 20%;
+    right: 3%;
+    animation-delay: 1.4s;
+}
+
+.stars span:nth-child(7) {
+    top: 55%;
+    right: 2%;
+    animation-delay: .2s;
+    width: 9px;
+    height: 9px;
+}
+
+.stars span:nth-child(8) {
+    top: 90%;
+    left: 45%;
+    animation-delay: .7s;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: .3;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* ── Ribbon streamers ─────────────────────── */
+.ribbon {
+    position: absolute;
+    top: -10px;
+    width: 12px;
+    height: 80px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-mid));
+    animation: sway 3s ease-in-out infinite;
+}
+
+.ribbon-left {
+    left: 18%;
+    transform-origin: top center;
+    animation-delay: .3s;
+}
+
+.ribbon-right {
+    right: 18%;
+    transform-origin: top center;
+}
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+/* ── Confetti ─────────────────────────────── */
+.confetti-wrap {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -20px;
+    width: 8px;
+    height: 14px;
+    border-radius: 2px;
+    animation: fall linear infinite;
+    opacity: .9;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ── Banner ───────────────────────────────── */
+.card {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.banner {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 22px;
+    padding: 10px 56px 12px;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-mid) 100%);
+    border-radius: 6px;
+    box-shadow:
+        0 6px 0 var(--gold-dark),
+        0 8px 20px rgba(0, 0, 0, .4);
+    clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0% 50%);
+}
+
+.banner::before,
+.banner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-mid));
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.banner::before {
+    left: -20px;
+}
+
+.banner::after {
+    right: -20px;
+}
+
+.banner span {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: var(--red-dark);
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, .5),
+        0 -1px 0 rgba(0, 0, 0, .3);
+    -webkit-text-stroke: .5px var(--gold-dark);
+}
+
+/* ── Subtitle ─────────────────────────────── */
+.subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+    letter-spacing: .3em;
+    color: var(--white);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+    margin-bottom: 28px;
+}
+
+/* ── Clock ────────────────────────────────── */
+.clock {
+    display: flex;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 20px);
+}
+
+.flip-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ── Flip box ─────────────────────────────── */
+.flip-box {
+    position: relative;
+    width: clamp(70px, 18vw, 110px);
+    height: clamp(80px, 20vw, 124px);
+    background: var(--digit-bg);
+    border-radius: 10px;
+    border: 3px solid var(--gold-mid);
+    box-shadow:
+        0 6px 0 var(--gold-dark),
+        inset 0 2px 6px rgba(255, 255, 255, .08),
+        0 10px 30px rgba(0, 0, 0, .6);
+    overflow: hidden;
+}
+
+/* gold side screws */
+.flip-box::before,
+.flip-box::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 35% 35%, var(--gold-light), var(--gold-dark));
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .5);
+}
+
+.flip-box::before {
+    left: -5px;
+}
+
+.flip-box::after {
+    right: -5px;
+}
+
+/* divider line */
+.flip-top,
+.flip-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    font-weight: 700;
+    color: var(--cream);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .7);
+    overflow: hidden;
+    user-select: none;
+}
+
+.flip-top {
+    top: 0;
+    background: linear-gradient(180deg, var(--digit-shine) 0%, var(--digit-bg) 100%);
+    border-bottom: 1.5px solid rgba(255, 255, 255, .08);
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+
+.flip-bottom {
+    bottom: 0;
+    background: linear-gradient(180deg, var(--digit-bg) 0%, #0d0d0d 100%);
+    align-items: flex-start;
+    padding-top: 2px;
+}
+
+/* flip animation */
+.flip-box.flip .flip-top {
+    animation: flipTop .35s ease-in forwards;
+}
+
+.flip-box.flip .flip-bottom {
+    animation: flipBot .35s ease-out .2s forwards;
+}
+
+@keyframes flipTop {
+    0% {
+        transform: rotateX(0deg);
+    }
+
+    100% {
+        transform: rotateX(-90deg);
+    }
+}
+
+@keyframes flipBot {
+    0% {
+        transform: rotateX(90deg);
+    }
+
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+/* ── Label ────────────────────────────────── */
+.label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(.65rem, 2vw, .9rem);
+    letter-spacing: .2em;
+    color: var(--cream);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+}
+
+/* ── Glow pulse on scene ──────────────────── */
+.scene {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 4px var(--gold-mid), 0 0 40px rgba(0, 0, 0, .5), inset 0 0 60px rgba(0, 0, 0, .25);
+    }
+
+    50% {
+        box-shadow: 0 0 0 4px var(--gold-light), 0 0 60px rgba(200, 100, 0, .4), inset 0 0 60px rgba(0, 0, 0, .25);
+    }
+}

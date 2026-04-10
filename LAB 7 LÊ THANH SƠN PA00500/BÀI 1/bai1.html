@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 1 - Hiệu ứng thông báo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    /* Khối thông báo */
+    #welcome-notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.6s ease;
+      z-index: 1000;
+    }
+
+    /* Khi hiện ra */
+    #welcome-notification.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align:center; margin-top:100px;">Website của chúng tôi</h1>
+
+  <!-- Khối thông báo -->
+  <div id="welcome-notification">
+    Chào mừng đến với website của chúng tôi
+  </div>
+
+  <script>
+    const notification = document.getElementById('welcome-notification');
+
+    // Hàm hiển thị thông báo
+    function showNotification() {
+      notification.classList.add('show');
+    }
+
+    // Hàm ẩn thông báo
+    function hideNotification() {
+      notification.classList.remove('show');
+    }
+
+    // Thực hiện theo yêu cầu
+    setTimeout(() => {
+      showNotification();        // Hiện sau 2 giây
+    }, 2000);
+
+    setTimeout(() => {
+      hideNotification();        // Ẩn sau 5 giây kể từ lúc hiện (tức tổng 7 giây)
+    }, 7000);
+  </script>
+
+</body>
+</html>

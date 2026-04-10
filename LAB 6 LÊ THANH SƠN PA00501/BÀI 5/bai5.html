@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>☕ Coffee Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="bai5.css" />
+</head>
+
+<body>
+
+    <!-- ========== HEADER CỐ ĐỊNH ========== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo">☕ CaféVN</div>
+            <nav class="header-nav">
+                <a href="#">Trang chủ</a>
+                <a href="#">Sản phẩm</a>
+                <a href="#">Về chúng tôi</a>
+            </nav>
+            <button class="cart-toggle-btn" id="cartToggleBtn">
+                🛒 Giỏ hàng <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== BANNER ========== -->
+    <section class="banner">
+        <div class="banner-content">
+            <p class="banner-sub">Hương vị đích thực từ cao nguyên</p>
+            <h1 class="banner-title">Cà Phê Nguyên Chất<br />Việt Nam</h1>
+            <a href="#shop" class="banner-btn">Mua ngay</a>
+        </div>
+    </section>
+
+    <!-- ========== KHU VỰC CHÍNH ========== -->
+    <main class="shop-layout" id="shop">
+
+        <!-- SIDEBAR LỌC -->
+        <aside class="sidebar">
+            <h3>Lọc sản phẩm</h3>
+
+            <div class="filter-group">
+                <label class="filter-title">Danh mục</label>
+                <label><input type="radio" name="category" value="all" checked /> Tất cả</label>
+                <label><input type="radio" name="category" value="arabica" /> Arabica</label>
+                <label><input type="radio" name="category" value="robusta" /> Robusta</label>
+                <label><input type="radio" name="category" value="xanh" /> Cà phê xanh</label>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-title">Giá tối đa</label>
+                <input type="range" id="priceRange" min="50000" max="300000" step="10000" value="300000" />
+                <span id="priceLabel">300.000đ</span>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-title">Sắp xếp</label>
+                <select id="sortSelect">
+                    <option value="default">Mặc định</option>
+                    <option value="asc">Giá tăng dần</option>
+                    <option value="desc">Giá giảm dần</option>
+                    <option value="name">Tên A–Z</option>
+                </select>
+            </div>
+        </aside>
+
+        <!-- GRID SẢN PHẨM -->
+        <section class="product-section">
+            <div class="section-header">
+                <h2>Sản phẩm</h2>
+                <span id="productCount"></span>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- ========== GIỎ HÀNG PANEL (SLIDE IN) ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-panel" id="cartPanel">
+        <div class="cart-panel-header">
+            <h2>🛒 Giỏ hàng của bạn</h2>
+            <button class="cart-close-btn" id="cartCloseBtn">✕</button>
+        </div>
+        <div class="cart-panel-body" id="cartBody">
+            <p class="cart-empty">Giỏ hàng trống.</p>
+        </div>
+    </aside>
+
+    <!-- TOAST THÔNG BÁO -->
+    <div class="toast" id="toast"></div>
+
+    <script src="bai5.js"></script>
+</body>
+
+</html>

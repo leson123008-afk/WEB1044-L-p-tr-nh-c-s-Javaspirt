@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 4 - Form Đăng Ký Tài Khoản</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        .form-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .form-body {
+            padding: 30px 35px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5a6fd8;
+        }
+
+        button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>ĐĂNG KÝ TÀI KHOẢN</h1>
+        </div>
+
+        <div class="form-body">
+            <form id="registerForm">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Nhập email của bạn" required>
+                    <div id="emailError" class="error-message"></div>
+                </div>
+
+                <!-- Mật khẩu -->
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+
+                <!-- Số điện thoại -->
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" placeholder="Nhập số điện thoại" maxlength="10" required>
+                    <div id="phoneError" class="error-message"></div>
+                </div>
+
+                <!-- Tuổi -->
+                <div class="form-group">
+                    <label for="age">Tuổi</label>
+                    <input type="number" id="age" placeholder="Nhập tuổi của bạn" min="1" required>
+                    <div id="ageError" class="error-message"></div>
+                </div>
+
+                <!-- Checkbox đồng ý điều khoản -->
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms">
+                    <label for="terms" style="margin:0; font-weight: normal;">
+                        Đồng ý với điều khoản dịch vụ
+                    </label>
+                </div>
+                <div id="termsError" class="error-message"></div>
+
+                <button type="submit" id="submitBtn">ĐĂNG KÝ</button>
+            </form>
+
+            <!-- Kết quả -->
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // ====================== THƯ VIỆN VALIDATOR.JS ======================
+        const validator = {
+            // Kiểm tra email hợp lệ
+            isValidEmail: function (email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            },
+
+            // Kiểm tra mật khẩu mạnh (ít nhất 6 ký tự, có chữ hoa, chữ thường, số, ký tự đặc biệt)
+            isStrongPassword: function (password) {
+                if (password.length < 6) return false;
+                const hasUpper = /[A-Z]/.test(password);
+                const hasLower = /[a-z]/.test(password);
+                const hasNumber = /[0-9]/.test(password);
+                const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                return hasUpper && hasLower && hasNumber && hasSpecial;
+            },
+
+            // Kiểm tra số điện thoại (đúng 10 chữ số)
+            isValidPhone: function (phone) {
+                const regex = /^[0-9]{10}$/;
+                return regex.test(phone);
+            },
+
+            // Kiểm tra tuổi >= 18
+            isValidAge: function (age) {
+                return parseInt(age) >= 18;
+            }
+        };
+
+        // ====================== XỬ LÝ FORM ======================
+        const form = document.getElementById('registerForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Lấy giá trị từ form
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const termsChecked = document.getElementById('terms').checked;
+
+            let isValid = true;
+
+            // Reset tất cả lỗi
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+
+            // 1. Kiểm tra Email
+            if (!validator.isValidEmail(email)) {
+                document.getElementById('emailError').textContent = "Email không hợp lệ (ví dụ: example@gmail.com)";
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+
+            // 2. Kiểm tra Mật khẩu
+            if (!validator.isStrongPassword(password)) {
+                document.getElementById('passwordError').textContent =
+                    "Mật khẩu phải có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt";
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+
+            // 3. Kiểm tra Số điện thoại
+            if (!validator.isValidPhone(phone)) {
+                document.getElementById('phoneError').textContent = "Số điện thoại phải đúng 10 chữ số (ví dụ: 0912345678)";
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            }
+
+            // 4. Kiểm tra Tuổi
+            if (!validator.isValidAge(age)) {
+                document.getElementById('ageError').textContent = "Bạn phải từ 18 tuổi trở lên để đăng ký";
+                document.getElementById('ageError').style.display = 'block';
+                isValid = false;
+            }
+
+            // 5. Kiểm tra đồng ý điều khoản
+            if (!termsChecked) {
+                document.getElementById('termsError').textContent = "Bạn phải đồng ý với điều khoản dịch vụ";
+                document.getElementById('termsError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Nếu tất cả hợp lệ
+            if (isValid) {
+                resultDiv.style.display = 'block';
+                resultDiv.style.backgroundColor = '#d4edda';
+                resultDiv.style.color = '#155724';
+                resultDiv.innerHTML = `
+                    <strong>✅ Đăng ký thành công!</strong><br><br>
+                    <b>Email:</b> ${email}<br>
+                    <b>Số điện thoại:</b> ${phone}<br>
+                    <b>Tuổi:</b> ${age}<br><br>
+                    Chúc mừng bạn đã tạo tài khoản thành công!
+                `;
+
+                // Reset form sau 3 giây
+                setTimeout(() => {
+                    form.reset();
+                    resultDiv.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Thêm tính năng: Tự động xóa lỗi khi người dùng gõ lại
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function () {
+                const errorEl = document.getElementById(this.id + 'Error');
+                if (errorEl) {
+                    errorEl.style.display = 'none';
+                }
+            });
+        });
+
+        // Thông báo hướng dẫn khi tải trang
+        console.log("%cBài 4 - Form Đăng Ký đã sẵn sàng. Hãy thử nhập dữ liệu để kiểm tra validation.",
+            "color: #667eea; font-weight: bold;");
+    </script>
+</body>
+
+</html>

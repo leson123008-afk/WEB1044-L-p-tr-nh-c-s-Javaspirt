@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Big Sale Countdown</title>
+    <link rel="stylesheet" href="bai2.css" />
+</head>
+
+<body>
+
+    <div class="scene">
+        <!-- Confetti -->
+        <div class="confetti-wrap" id="confetti"></div>
+
+        <!-- Stars -->
+        <div class="stars">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- Ribbons -->
+        <div class="ribbon ribbon-left"></div>
+        <div class="ribbon ribbon-right"></div>
+
+        <!-- Card -->
+        <div class="card">
+            <div class="banner">
+                <span>BIG SALE</span>
+            </div>
+
+            <p class="subtitle">ENDS IN</p>
+
+            <div class="clock">
+                <div class="flip-unit">
+                    <div class="flip-box" id="box-days">
+                        <div class="flip-top" id="days-top">00</div>
+                        <div class="flip-bottom" id="days-bot">00</div>
+                    </div>
+                    <div class="label">DAYS</div>
+                </div>
+
+                <div class="flip-unit">
+                    <div class="flip-box" id="box-hours">
+                        <div class="flip-top" id="hours-top">00</div>
+                        <div class="flip-bottom" id="hours-bot">00</div>
+                    </div>
+                    <div class="label">HOURS</div>
+                </div>
+
+                <div class="flip-unit">
+                    <div class="flip-box" id="box-minutes">
+                        <div class="flip-top" id="minutes-top">00</div>
+                        <div class="flip-bottom" id="minutes-bot">00</div>
+                    </div>
+                    <div class="label">MINUTES</div>
+                </div>
+
+                <div class="flip-unit">
+                    <div class="flip-box" id="box-seconds">
+                        <div class="flip-top" id="seconds-top">00</div>
+                        <div class="flip-bottom" id="seconds-bot">00</div>
+                    </div>
+                    <div class="label">SECONDS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bai2.js"></script>
+</body>
+
+</html>

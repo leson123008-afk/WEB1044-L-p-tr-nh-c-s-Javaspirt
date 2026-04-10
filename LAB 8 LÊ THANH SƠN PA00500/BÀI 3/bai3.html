@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3 - Giỏ hàng + Notification API</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .cart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+        }
+
+        #checkoutBtn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #checkoutBtn:hover {
+            background-color: #219653;
+        }
+
+        #status {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        .success {
+            color: #27ae60;
+        }
+
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Giỏ hàng của bạn</h1>
+
+    <div class="cart-container">
+        <h2>Sản phẩm trong giỏ</h2>
+        <div id="cartItems"></div>
+        <div class="total">
+            Tổng tiền: <span id="totalPrice">0</span> ₫
+        </div>
+    </div>
+
+    <button id="checkoutBtn">Thanh Toán</button>
+    <div id="status"></div>
+
+    <script>
+        // Dữ liệu giỏ hàng
+        let cart = [
+            { id: 1, name: "Áo thun nam", price: 250000, quantity: 2 },
+            { id: 2, name: "Quần jeans", price: 450000, quantity: 1 },
+            { id: 3, name: "Giày thể thao", price: 650000, quantity: 1 }
+        ];
+
+        // Render giỏ hàng
+        function renderCart() {
+            const cartContainer = document.getElementById('cartItems');
+            const totalElement = document.getElementById('totalPrice');
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p style="text-align:center; color:#888;">Giỏ hàng trống</p>';
+                totalElement.textContent = '0';
+                return;
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <small>Số lượng: ${item.quantity}</small>
+                    </div>
+                    <div style="text-align:right;">
+                        ${itemTotal.toLocaleString('vi-VN')} ₫
+                    </div>
+                `;
+                cartContainer.appendChild(div);
+            });
+
+            totalElement.textContent = total.toLocaleString('vi-VN');
+        }
+
+        // Hiển thị Notification
+        function showNotification() {
+            const title = "Thanh toán thành công";
+            const message = "Chúc mừng bạn đã mua hàng thành công! 🎉";
+
+            if (!("Notification" in window)) {
+                document.getElementById('status').innerHTML =
+                    `<span class="error">Trình duyệt không hỗ trợ Notification API</span>`;
+                alert("✅ " + message);
+                return;
+            }
+
+            // Đã được cấp quyền
+            if (Notification.permission === "granted") {
+                new Notification(title, {
+                    body: message,
+                    tag: "purchase-success"
+                });
+                document.getElementById('status').innerHTML =
+                    `<span class="success">✅ Đã cấp quyền và gửi notification!</span>`;
+            }
+            // Chưa hỏi quyền → tự động hỏi
+            else if (Notification.permission === "default") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(title, { body: message, tag: "purchase-success" });
+                        document.getElementById('status').innerHTML =
+                            `<span class="success">✅ Đã cấp quyền và gửi notification!</span>`;
+                    } else {
+                        document.getElementById('status').innerHTML =
+                            `<span class="error">⚠️ Bạn đã từ chối quyền thông báo</span>`;
+                        alert("✅ " + message);
+                    }
+                });
+            }
+            // Đã bị từ chối
+            else {
+                document.getElementById('status').innerHTML =
+                    `<span class="error">❌ Quyền thông báo bị từ chối</span>`;
+                alert("✅ " + message);
+            }
+        }
+
+        // Xử lý nút Thanh Toán
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("Giỏ hàng của bạn đang trống!");
+                return;
+            }
+
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = "Đang xử lý thanh toán...";
+
+            // Giả lập thời gian xử lý
+            setTimeout(() => {
+                showNotification();
+
+                // Xóa giỏ hàng sau khi thanh toán thành công
+                cart = [];
+                renderCart();
+            }, 1000);
+        });
+
+        // Khởi tạo trang
+        window.onload = renderCart;
+    </script>
+</body>
+
+</html>
