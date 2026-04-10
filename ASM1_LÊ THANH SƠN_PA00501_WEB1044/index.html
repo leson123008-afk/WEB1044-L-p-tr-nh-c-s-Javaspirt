@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Hoa Của Trí Bùi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/counting-clock.css">
+        
+</head>
+<body>
+    <div class="topBar">
+        <div class="leftTop">
+            <input type="text" name="" placeholder="Nhập tên hoa"><button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <img src="/img/Logo.png" alt="" id="logoVuonHoaTuoi">
+        <div class="rightTop" id="socialMedia">
+            <button><i class="fa-brands fa-facebook-f"></i></button>
+            <button><i class="fa-brands fa-tiktok"></i></button>
+            <button><i class="fa-brands fa-youtube"></i></button>
+            <button><i class="fa-brands fa-square-instagram"></i></button>
+            <button><i class="fa-brands fa-twitter"></i></button>
+            <button><i class="fa-brands fa-pinterest"></i></button>
+            <a href="/shopping-cart.html"><img src="/img/shopping-cart.png" alt=""></a>
+            <!-- <a href="/shopping-cart.html"><i class="fa-solid fa-cart-shopping"></i></a> -->
+        </div>
+    </div>
+
+    <div class="countCart">
+        <span id="shoppingCartCounting">0</span>
+    </div>
+
+    <div class="secondTopBar">
+        <h4>Hoa Sinh Nhật  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Khai Trương  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Tặng Tốt Nghiệp  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa Hồng  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Thiết Kế  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Chủ Đề  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Loại Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4 id="scndBar_lastChild"><a href="/register.html">Đăng Ký / Đăng Nhập</a></h4>
+        <h4 id="logout">Đăng Xuất</h4>
+    </div>
+
+    <div class="slider">
+        <img src="img/firstSlider.webp" alt="" id="img">
+        <i class="fa-solid fa-angles-left" onclick="prev()"></i>
+        <i class="fa-solid fa-angles-right" onclick="next()"></i>
+    </div>
+
+    <div id="flashSale" class="flashSale" style="margin-top: 1%;">
+        <span style="color: red; margin: -30px;">Flash Sale Till 02/09 ! <i class="fa-solid fa-bolt"></i></span>
+        <br>
+        <div>
+            <span id="ngay" class="span_time">1 Ngày</span>
+            <span id="gio" class="span_time">1 Giờ</span>
+            <span id="phut" class="span_time">1 Phút</span>
+            <span id="giay" class="span_time">1 Giây</span>
+        </div>
+    </div>    
+
+    <span id="boHoaGiaRe">BÓ HOA GIÁ RẺ HÔM NAY</span>
+    <div class="firstMenu">
+        <div class="firstList" id="firstList">
+        </div>
+        <div class="secondList" id="secondList">
+        </div>
+    </div>
+    
+
+    <script src="/script/script.js"></script>
+    <script src="/script/cart-control.js"></script>
+    <script src="/script/clock-counting.js"></script>
+    <script src="/script/slider.js"></script>
+    <script src="/script/check-status.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.slider{
+    width: 80%;
+    margin: 2% auto;
+    position: relative;
+}
+.slider img{
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 5px gray;
+}
+.fa-angles-left{
+    position: absolute;
+    left: 20px;
+    top: 42%;
+    font-size: 60px;
+    transition: .3s;
+    border-radius: 50px;
+    padding: 15px;
+    color: #069A03;
+    background-color: aliceblue;
+    border: 1px solid #069A03;
+}
+.fa-angles-right{
+    position: absolute;
+    right: 20px;
+    top: 42%;
+    font-size: 60px;
+    transition: .3s;
+    border-radius: 50px;
+    padding: 15px;
+    color: #069A03;
+    background-color: aliceblue;
+    border: 1px solid #069A03;
+}
+.fa-angles-left:hover{
+    color: aliceblue;
+    background-color: #069A03;
+}
+.fa-angles-right:hover{
+    color: aliceblue;
+    background-color: #069A03;
+}
+
+.topBar {
+    z-index: 2;
+    width: 80%;
+    margin: auto;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topBar img {
+    clear: both;
+    box-shadow: 0;
+    width: 20%;
+    transition: .3s;
+}
+
+.topBar img:hover {
+    transform: scale(1.1);
+    cursor: cell;
+}
+
+.leftTop input {
+    border: 1px solid #069A03;
+    width: 250px;
+    height: 50px;
+    font-size: large;
+    padding-left: 5%;
+    border-radius: 10px 0 0 10px;
+}
+
+.leftTop button {
+    color: white;
+    background-color: #069A03;
+    width: 50px;
+    height: 50px;
+    font-size: large;
+    border-radius: 0 7px 7px 0;
+}
+
+.rightTop {
+    display: flex;
+}
+
+.rightTop a>img {
+    width: 50px;
+    height: 50px;
+    /* margin-left:; */
+    transition: .3s;
+}
+
+.rightTop a:hover>img {
+    width: 60px;
+    height: 60px;
+    margin-top: -10px;
+}
+
+.rightTop button {
+    margin: 0 4px;
+    width: 50px;
+    height: 50px;
+    font-size: x-large;
+    background-color: white;
+    color: #069A03;
+    border: 1px solid #069A03;
+    border-radius: 5px;
+    transition: .3s;
+    cursor: inherit;
+}
+.rightTop button:hover {
+    width: 50px;
+    height: 50px;
+    font-size: large;
+    color: white;
+    background-color: #069A03;
+    cursor: inherit;
+}
+
+.secondTopBar {
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    background-color: #efefef;
+    box-shadow: 0px 30px 60px gray;
+}
+
+.secondTopBar h4 {
+    background-color: #efefef;
+    padding: 10px 20px;
+    color: rgb(255, 0, 102);
+    font-size: large;
+    font-weight: 400;
+    transition: .3s;
+    cursor: default;
+    margin: 0 10px;
+}
+
+.secondTopBar a {
+    padding: 10px 20px;
+    color: rgb(255, 0, 102);
+    font-size: large;
+    font-weight: 400;
+    transition: .3s;
+}
+
+.secondTopBar h4:hover {
+    background-color: #069A03;
+    color: #eeeeee;
+}
+
+#logout {
+    display: none;
+}
+
+.secondTopBar a:hover {
+    color: #eeeeee;
+}
+
+.firstMenu {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#boHoaGiaRe {
+    position: absolute;
+    color: white;
+    background-color: #06C471;
+    padding: 10px 200px;
+    text-align: center;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+}
+
+.firstList {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 1%;
+    margin: auto;
+}
+
+.secondList {
+    gap: 1%;
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.showcase {
+    position: relative;
+    width: 20%;
+    height: 450px;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 0px 5px 5px gray;
+    transition: 0.3s;
+    cursor: help;
+}
+
+.showcase:hover>h4, .showcase:hover>h3 {
+    color: red;
+    cursor: help;
+}
+
+.showcase img:nth-child(1) {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    cursor: help;
+}
+
+.showcase h4 {
+    margin: 7px 0;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.showcase h3 {
+    color: black;
+    font-size: x-large;
+    margin: 0;
+    font-weight: 600;
+}
+
+.showcase>img, .showcase>h4, .showcase>h3 {
+    transition: .3s;
+    cursor: default;
+}
+
+.showcase:hover>img:first-child {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px 3px red;
+}
+
+
+.showcase button {
+    height: 50px;
+    width: 200px;
+    margin-top: 7px;
+    font-size: large;
+    background-color: white;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.showcase button:hover {
+    background-color: orangered;
+    color: white;
+    cursor: copy;
+}
+
+
+.showcase img:last-child {
+    width: 30%;
+    position: absolute;
+    top: -2px;  
+    left: -2px;
+}
+
+.countCart {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    right: 9%;
+    top: 2%;
+    box-shadow: -2px 1px 5px 1px black;
+    z-index: -1;
+}
+
+.countCart span {
+    color: white;
+    font-size: 1.7em;
+    line-height: 30px;
+}

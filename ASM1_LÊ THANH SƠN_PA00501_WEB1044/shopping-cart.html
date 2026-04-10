@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Hoa Của Trí Bùi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/cart.css">
+</head>
+<body>
+    <div class="topBar">
+        <div class="leftTop">
+            <input type="text" name="" id="" placeholder="Nhập tên hoa"><button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <img src="/img/Logo.png" alt="" id="logoVuonHoaTuoi">
+        <div class="rightTop">
+            <button><i class="fa-brands fa-facebook-f"></i></button>
+            <button><i class="fa-brands fa-tiktok"></i></button>
+            <button><i class="fa-brands fa-youtube"></i></button>
+            <button><i class="fa-brands fa-square-instagram"></i></button>
+            <button><i class="fa-brands fa-twitter"></i></button>
+            <button><i class="fa-brands fa-pinterest"></i></button>
+            <a href="#"><img src="/img/shopping-cart.png" alt=""></a>
+        </div>
+    </div>
+
+    <div class="countCart">
+        <span id="shoppingCartCounting">0</span>
+    </div>
+
+    <div class="secondTopBar">
+        <h4>Hoa Sinh Nhật  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Khai Trương  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Tặng Tốt Nghiệp  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Bó Hoa Hồng  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Thiết Kế  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Hoa Chủ Đề  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4>Loại Hoa  <i class="fa-solid fa-angle-right"></i></h4>
+        <h4 id="scndBar_lastChild"><a href="/register.html">Đăng Ký / Đăng Nhập</a></h4>
+        <h4 id="logout">Đăng Xuất</h4>
+    </div>
+
+    <table id="cart">
+        <tr>
+            <td>STT</td>
+            <td>Hình sp</td>
+            <td>Tên SP</td>
+            <td>Giá SP</td>
+            <td>Số lượng</td>
+            <td>Thành tiền</td>
+            <td>Hành Động</td>
+        </tr>
+        <tbody id="tb">
+            <td colspan="7" id="emptyRow">BẠN CHƯA THÊM SẢN PHẨM NÀO</td>
+        </tbody>
+            <tr>
+                <td colspan="5"><h2>Tổng tiền</h2></td>
+                <td><h2 id="sum"></h2></td>
+                <!-- <td id="khongCo"></td> -->
+                <td><a href="/thanh-toan.html" id="payment">Thanh Toán</a></td>
+            </tr>
+    </table>
+
+    <!-- <table id="cart">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Hình sp</th>
+                <th>Tên SP</th>
+                <th>Giá SP</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+            <tr id="emptyRow">
+                <td colspan="7">BẠN CHƯA THÊM SẢN PHẨM NÀO</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><h2>Tổng tiền</h2></td>
+                <td><h2 id="sum"></h2></td>
+                <td id="khongCo"></td>
+            </tr>
+        </tfoot>
+    </table>     -->
+    
+    <script>
+        let shoppingCartCounting = parseInt(localStorage.getItem("shoppingCartCounting")) || 0;
+        document.getElementById('shoppingCartCounting').textContent = shoppingCartCounting;
+    
+        let logoVuonHoaTuoi = document.getElementById('logoVuonHoaTuoi').parentElement.children[1];
+        // console.log(logoVuonHoaTuoi)
+    
+        logoVuonHoaTuoi.addEventListener('click', () => {
+            window.location.href = '/index.html';
+        })
+    
+        // Thêm sự kiện click cho tất cả các button bên trong .showcase
+        document.querySelectorAll('.showcase button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                shoppingCartCounting += 1;
+                localStorage.setItem("shoppingCartCounting", shoppingCartCounting)
+                document.getElementById('shoppingCartCounting').textContent = shoppingCartCounting;
+            });
+        });
+    </script>
+    <script src="/script/cart-control.js"></script>
+    <script src="/script/check-status.js"></script>
+</body>
